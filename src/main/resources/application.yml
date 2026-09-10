@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: openledger
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/openledger}
+    username: ${DB_USER:openledger}
+    password: ${DB_PASSWORD:openledger}
+    hikari:
+      maximum-pool-size: 16
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 9000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: openledger
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+
+openledger:
+  # fixed tenant used when a request omits the X-Tenant-Id header
+  default-tenant: "00000000-0000-0000-0000-000000000000"
+  reconciliation:
+    # every 5 minutes
+    cron: "0 */5 * * * *"
