@@ -36,6 +36,20 @@ parts:
 `docs/DESIGN.md` has the reasoning behind each of these if you want the
 longer version.
 
+## How this was built
+
+This is a vibe-coded project - Claude wrote most of the implementation, with
+me driving requirements and review rather than typing every line. It wasn't
+a blind accept-all session: every non-trivial decision (plain SQL vs JPA,
+pessimistic vs optimistic locking, minor units vs `BigDecimal`, how
+idempotency should fail) got argued out with the trade-offs on both sides,
+and I made the final call on each one. `docs/DESIGN.md` records that
+reasoning, including the alternatives that were considered and rejected, not
+just the choice that won.
+
+Read the code with that in mind - it's a solid MVP, not something that's
+been through years of production hardening.
+
 ## Run it
 
 ```bash
